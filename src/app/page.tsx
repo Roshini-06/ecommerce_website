@@ -1,16 +1,43 @@
-import { getProducts } from '@/lib/data';
+'use client'
+
+import { useState } from 'react';
+import { getProducts, getCategories } from '@/lib/data';
 import ProductCard from '@/components/product-card';
+import { Button } from '@/components/ui/button';
 
 export default function Home() {
-  const products = getProducts();
+  const allProducts = getProducts();
+  const categories = getCategories();
+  const [filteredProducts, setFilteredProducts] = useState(allProducts);
+  const [activeCategory, setActiveCategory] = useState('All');
+
+  const handleCategoryClick = (category: string) => {
+    setActiveCategory(category);
+    if (category === 'All') {
+      setFilteredProducts(allProducts);
+    } else {
+      setFilteredProducts(allProducts.filter(p => p.category === category));
+    }
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="mb-8 text-3xl font-bold tracking-tight text-center sm:text-4xl">
+      <h1 className="mb-4 text-3xl font-bold tracking-tight text-center sm:text-4xl">
         Explore Our Collection
       </h1>
+      <div className="mb-8 flex flex-wrap justify-center gap-2">
+        {categories.map((category) => (
+          <Button
+            key={category}
+            variant={activeCategory === category ? 'default' : 'outline'}
+            onClick={() => handleCategoryClick(category)}
+          >
+            {category}
+          </Button>
+        ))}
+      </div>
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>

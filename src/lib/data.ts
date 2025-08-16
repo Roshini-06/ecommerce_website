@@ -65,6 +65,70 @@ const products: Product[] = [
     imageUrl: 'https://placehold.co/600x600.png',
     category: 'Lighting',
   },
+  {
+    id: '9',
+    name: 'Wireless Bluetooth Speaker',
+    description: 'Portable and powerful, this Bluetooth speaker delivers crisp, room-filling sound. Long-lasting battery for music on the go.',
+    price: 129.99,
+    imageUrl: 'https://placehold.co/600x600.png',
+    category: 'Electronics',
+  },
+  {
+    id: '10',
+    name: 'Smart Coffee Maker',
+    description: 'Brew the perfect cup of coffee from your phone. This smart coffee maker lets you schedule brewing times and customize strength.',
+    price: 149.00,
+    imageUrl: 'https://placehold.co/600x600.png',
+    category: 'Kitchen',
+  },
+  {
+    id: '11',
+    name: 'Memory Foam Mattress Topper',
+    description: 'Upgrade your sleep with this 3-inch memory foam mattress topper. It conforms to your body for pressure relief and comfort.',
+    price: 180.0,
+    imageUrl: 'https://placehold.co/600x600.png',
+    category: 'Bedroom',
+  },
+  {
+    id: '12',
+    name: 'Acacia Wood Dining Table',
+    description: 'A beautiful and durable dining table crafted from solid acacia wood. Comfortably seats six people, perfect for family dinners.',
+    price: 750.0,
+    imageUrl: 'https://placehold.co/600x600.png',
+    category: 'Dining',
+  },
+  {
+    id: '13',
+    name: 'Digital Air Fryer',
+    description: 'Enjoy your favorite fried foods with less oil. This digital air fryer has multiple presets for easy and healthy cooking.',
+    price: 99.50,
+    imageUrl: 'https://placehold.co/600x600.png',
+    category: 'Kitchen',
+  },
+  {
+    id: '14',
+    name: 'Outdoor Patio Set',
+    description: 'A comfortable and stylish 3-piece patio set, including two chairs and a small table. Weather-resistant and perfect for your balcony or garden.',
+    price: 399.00,
+    imageUrl: 'https://placehold.co/600x600.png',
+    category: 'Outdoor',
+  },
+  {
+    id: '15',
+    name: 'Noise-Cancelling Headphones',
+    description: 'Immerse yourself in music with these over-ear noise-cancelling headphones. Superior sound quality and all-day comfort.',
+    price: 249.99,
+    imageUrl: 'https://placehold.co/600x600.png',
+    category: 'Electronics',
+  },
+  {
+    id: '16',
+    name: 'Set of 4 Wall Art Prints',
+    description: 'Modern abstract art prints to elevate your home decor. High-quality prints on archival paper, ready to be framed.',
+    price: 75.00,
+    imageUrl: 'https://placehold.co/600x600.png',
+    category: 'Decor',
+  }
 ];
 
 export const getProducts = (): Product[] => products;
@@ -72,3 +136,8 @@ export const getProducts = (): Product[] => products;
 export const getProductById = (id: string): Product | undefined => {
   return products.find((p) => p.id === id);
 };
+
+export const getCategories = (): string[] => {
+    const categories = products.map(product => product.category);
+    return ['All', ...new Set(categories)];
+}
