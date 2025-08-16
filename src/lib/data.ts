@@ -149,6 +149,40 @@ const products: Product[] = [
     price: 65.00,
     imageUrl: 'https://placehold.co/600x600.png',
     category: 'Storage',
+  },
+  {
+    id: '19',
+    name: 'Upholstered Dining Chairs (Set of 2)',
+    description: 'Elegant and comfortable dining chairs with a cushioned seat and back, upholstered in a durable fabric. Perfect for any dining room.',
+    price: 250.00,
+    salePrice: 225.00,
+    imageUrl: 'https://placehold.co/600x600.png',
+    category: 'Dining',
+  },
+  {
+    id: '20',
+    name: 'Modern TV Stand',
+    description: 'A sleek and modern TV stand with ample storage for your media devices. Fits TVs up to 65 inches. Features cable management holes.',
+    price: 350.00,
+    imageUrl: 'https://placehold.co/600x600.png',
+    category: 'Living Room',
+  },
+  {
+    id: '21',
+    name: 'Professional Chef\'s Knife Set',
+    description: 'A complete set of high-carbon stainless steel knives for all your kitchen tasks. Includes a wooden block for safe storage.',
+    price: 180.00,
+    imageUrl: 'https://placehold.co/600x600.png',
+    category: 'Kitchen',
+  },
+  {
+    id: '22',
+    name: 'Robotic Vacuum Cleaner',
+    description: 'Keep your floors clean with this smart robotic vacuum. Wi-Fi connected, works with voice assistants, and ideal for pet hair.',
+    price: 299.00,
+    salePrice: 249.00,
+    imageUrl: 'https://placehold.co/600x600.png',
+    category: 'Electronics',
   }
 ];
 
