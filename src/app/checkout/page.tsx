@@ -7,9 +7,9 @@ import * as z from 'zod';
 import { useCart } from '@/context/cart-context';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { useToast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters.'),
@@ -22,6 +22,7 @@ const formSchema = z.object({
 export default function CheckoutPage() {
   const router = useRouter();
   const { clearCart, cartTotal, cartCount } = useCart();
+  const { toast } = useToast();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -42,6 +43,10 @@ export default function CheckoutPage() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log('Order submitted:', values);
     clearCart();
+    toast({
+        title: "Order Placed!",
+        description: "Thank you for your purchase. A confirmation is on its way.",
+    });
     router.push('/order-confirmation');
   }
 
