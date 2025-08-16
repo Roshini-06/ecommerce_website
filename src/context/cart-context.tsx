@@ -62,7 +62,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
      toast({
       title: "Item removed",
       description: `An item has been removed from your cart.`,
-      variant: "destructive"
     })
   };
 
@@ -83,7 +82,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   }
 
   const cartCount = cartItems.reduce((count, item) => count + item.quantity, 0);
-  const cartTotal = cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0);
+  const cartTotal = cartItems.reduce((total, item) => {
+    const price = item.product.salePrice ?? item.product.price;
+    return total + price * item.quantity;
+  }, 0);
 
   return (
     <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateQuantity, clearCart, cartCount, cartTotal }}>

@@ -5,10 +5,11 @@ import { useCart } from '@/context/cart-context';
 import { Button } from '@/components/ui/button';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import { ShoppingCart, ArrowLeft } from 'lucide-react';
+import { ShoppingCart, ArrowLeft, Tag } from 'lucide-react';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
+import { Badge } from '@/components/ui/badge';
 
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
   const [quantity, setQuantity] = useState(1);
@@ -32,7 +33,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
         </Link>
       </Button>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <div className="overflow-hidden rounded-lg">
+        <div className="relative overflow-hidden rounded-lg">
           <Image
             src={product.imageUrl}
             alt={product.name}
@@ -41,11 +42,26 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             className="h-full w-full object-cover"
             data-ai-hint={`${product.category} furniture`}
           />
+           {product.salePrice && (
+            <Badge variant="destructive" className="absolute left-4 top-4 flex items-center gap-1 text-base">
+              <Tag className="h-4 w-4" />
+              SALE
+            </Badge>
+          )}
         </div>
         <div className="flex flex-col justify-center space-y-6">
           <h1 className="text-3xl font-bold tracking-tight md:text-4xl">{product.name}</h1>
           <p className="text-muted-foreground">{product.description}</p>
-          <p className="text-4xl font-extrabold text-primary">${product.price.toFixed(2)}</p>
+          <div className="flex items-baseline gap-4">
+            {product.salePrice ? (
+              <>
+                <p className="text-4xl font-extrabold text-destructive">${product.salePrice.toFixed(2)}</p>
+                <p className="text-2xl font-medium text-muted-foreground line-through">${product.price.toFixed(2)}</p>
+              </>
+            ) : (
+              <p className="text-4xl font-extrabold text-primary">${product.price.toFixed(2)}</p>
+            )}
+          </div>
           <div className="flex items-center gap-4">
             <Input
               type="number"

@@ -6,6 +6,7 @@ const products: Product[] = [
     name: 'Modern Accent Chair',
     description: 'A stylish and comfortable chair that adds a modern touch to any room. Upholstered in premium fabric with solid wood legs for durability.',
     price: 299.99,
+    salePrice: 249.99,
     imageUrl: 'https://placehold.co/600x600.png',
     category: 'Living Room',
   },
@@ -30,6 +31,7 @@ const products: Product[] = [
     name: 'Industrial Bookshelf',
     description: 'A five-tier bookshelf combining a metal frame with rustic wood shelves. Ideal for displaying books, decor, and plants in any living area or office.',
     price: 220.5,
+    salePrice: 199.50,
     imageUrl: 'https://placehold.co/600x600.png',
     category: 'Storage',
   },
@@ -54,6 +56,7 @@ const products: Product[] = [
     name: 'Ergonomic Office Chair',
     description: 'Stay comfortable during long work hours with this adjustable ergonomic chair, featuring lumbar support, armrests, and smooth-rolling casters.',
     price: 320.0,
+    salePrice: 280.0,
     imageUrl: 'https://placehold.co/600x600.png',
     category: 'Office',
   },
@@ -65,7 +68,7 @@ const products: Product[] = [
     imageUrl: 'https://placehold.co/600x600.png',
     category: 'Lighting',
   },
-  {
+    {
     id: '9',
     name: 'Wireless Bluetooth Speaker',
     description: 'Portable and powerful, this Bluetooth speaker delivers crisp, room-filling sound. Long-lasting battery for music on the go.',
@@ -102,6 +105,7 @@ const products: Product[] = [
     name: 'Digital Air Fryer',
     description: 'Enjoy your favorite fried foods with less oil. This digital air fryer has multiple presets for easy and healthy cooking.',
     price: 99.50,
+    salePrice: 89.00,
     imageUrl: 'https://placehold.co/600x600.png',
     category: 'Kitchen',
   },
@@ -128,6 +132,23 @@ const products: Product[] = [
     price: 75.00,
     imageUrl: 'https://placehold.co/600x600.png',
     category: 'Decor',
+  },
+  {
+    id: '17',
+    name: 'Compact Standing Mixer',
+    description: 'A powerful and compact mixer for all your baking needs. Comes with multiple attachments for dough, batter, and more.',
+    price: 199.99,
+    salePrice: 179.99,
+    imageUrl: 'https://placehold.co/600x600.png',
+    category: 'Kitchen',
+  },
+  {
+    id: '18',
+    name: 'Woven Storage Baskets (Set of 3)',
+    description: 'Stylish and functional woven baskets for organizing your home. Perfect for storing blankets, toys, or magazines.',
+    price: 65.00,
+    imageUrl: 'https://placehold.co/600x600.png',
+    category: 'Storage',
   }
 ];
 
@@ -139,5 +160,7 @@ export const getProductById = (id: string): Product | undefined => {
 
 export const getCategories = (): string[] => {
     const categories = products.map(product => product.category);
-    return ['All', ...new Set(categories)];
+    // Add 'Deals' category and ensure 'All' is first
+    const uniqueCategories = ['All', 'Deals', ...new Set(categories)];
+    return uniqueCategories;
 }

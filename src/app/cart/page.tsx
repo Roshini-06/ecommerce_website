@@ -46,7 +46,16 @@ export default function CartPage() {
                   <Link href={`/products/${product.id}`} className="font-semibold hover:underline">
                     {product.name}
                   </Link>
-                  <p className="text-sm text-muted-foreground">${product.price.toFixed(2)}</p>
+                   <div className="flex items-baseline gap-2 text-sm">
+                    {product.salePrice ? (
+                      <>
+                        <p className="font-semibold text-destructive">${product.salePrice.toFixed(2)}</p>
+                        <p className="text-muted-foreground line-through">${product.price.toFixed(2)}</p>
+                      </>
+                    ) : (
+                       <p className="text-muted-foreground">${product.price.toFixed(2)}</p>
+                    )}
+                  </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <Input

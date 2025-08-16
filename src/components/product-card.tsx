@@ -6,7 +6,8 @@ import type { Product } from '@/lib/types';
 import { useCart } from '@/context/cart-context';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, Tag } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 interface ProductCardProps {
   product: Product;
@@ -17,7 +18,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Card className="flex h-full flex-col overflow-hidden rounded-lg shadow-md transition-shadow hover:shadow-xl">
-      <CardHeader className="p-0">
+      <CardHeader className="relative p-0">
         <Link href={`/products/${product.id}`}>
           <div className="aspect-square overflow-hidden">
             <Image
@@ -30,6 +31,12 @@ export default function ProductCard({ product }: ProductCardProps) {
             />
           </div>
         </Link>
+        {product.salePrice && (
+          <Badge variant="destructive" className="absolute left-3 top-3 flex items-center gap-1">
+            <Tag className="h-3 w-3" />
+            SALE
+          </Badge>
+        )}
       </CardHeader>
       <CardContent className="flex-grow p-4">
         <Link href={`/products/${product.id}`}>
@@ -37,9 +44,22 @@ export default function ProductCard({ product }: ProductCardProps) {
         </Link>
       </CardContent>
       <CardFooter className="flex items-center justify-between p-4 pt-0">
-        <p className="text-xl font-bold text-primary">
-          ${product.price.toFixed(2)}
-        </p>
+        <div className="flex items-baseline gap-2">
+          {product.salePrice ? (
+            <>
+              <p className="text-xl font-bold text-destructive">
+                ${product.salePrice.toFixed(2)}
+              </p>
+              <p className="text-sm font-medium text-muted-foreground line-through">
+                ${product.price.toFixed(2)}
+              </p>
+            </>
+          ) : (
+            <p className="text-xl font-bold text-primary">
+              ${product.price.toFixed(2)}
+            </p>
+          )}
+        </div>
         <Button onClick={() => addToCart(product)} size="icon" aria-label="Add to cart">
           <ShoppingCart />
         </Button>
