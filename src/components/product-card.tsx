@@ -16,13 +16,18 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart();
 
+  // ✅ Fallback image if product.image is missing or empty
+  const imageSrc = product.image && product.image.trim() !== '' 
+    ? product.image 
+    : 'images/placeholder.jpg';
+
   return (
     <Card className="flex h-full flex-col overflow-hidden rounded-lg shadow-md transition-shadow hover:shadow-xl">
       <CardHeader className="relative p-0">
         <Link href={`/products/${product.id}`}>
           <div className="aspect-square overflow-hidden">
             <Image
-              src={product.imageUrl}
+              src={product.image}
               alt={product.name}
               width={600}
               height={600}
@@ -32,7 +37,10 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
         </Link>
         {product.salePrice && (
-          <Badge variant="destructive" className="absolute left-3 top-3 flex items-center gap-1">
+          <Badge
+            variant="destructive"
+            className="absolute left-3 top-3 flex items-center gap-1"
+          >
             <Tag className="h-3 w-3" />
             SALE
           </Badge>
@@ -40,7 +48,9 @@ export default function ProductCard({ product }: ProductCardProps) {
       </CardHeader>
       <CardContent className="flex-grow p-4">
         <Link href={`/products/${product.id}`}>
-          <CardTitle className="text-lg font-semibold hover:text-primary">{product.name}</CardTitle>
+          <CardTitle className="text-lg font-semibold hover:text-primary">
+            {product.name}
+          </CardTitle>
         </Link>
       </CardContent>
       <CardFooter className="flex items-center justify-between p-4 pt-0">
@@ -60,7 +70,11 @@ export default function ProductCard({ product }: ProductCardProps) {
             </p>
           )}
         </div>
-        <Button onClick={() => addToCart(product)} size="icon" aria-label="Add to cart">
+        <Button
+          onClick={() => addToCart(product)}
+          size="icon"
+          aria-label="Add to cart"
+        >
           <ShoppingCart />
         </Button>
       </CardFooter>

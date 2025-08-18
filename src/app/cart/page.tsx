@@ -35,7 +35,7 @@ export default function CartPage() {
             {cartItems.map(({ product, quantity }) => (
               <Card key={product.id} className="flex items-center p-4">
                 <Image
-                  src={product.imageUrl}
+                  src={product.image}
                   alt={product.name}
                   width={100}
                   height={100}

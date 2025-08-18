@@ -33,22 +33,25 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
         </Link>
       </Button>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <div className="relative overflow-hidden rounded-lg">
+        
+        {/* ✅ Fixed Image Section */}
+        <div className="relative mx-auto w-[400px] h-[400px] overflow-hidden rounded-lg">
           <Image
-            src={product.imageUrl}
+            src={product.image}
             alt={product.name}
-            width={800}
-            height={800}
-            className="h-full w-full object-cover"
+            fill
+            className="object-contain"
             data-ai-hint={`${product.category} furniture`}
           />
-           {product.salePrice && (
+          {product.salePrice && (
             <Badge variant="destructive" className="absolute left-4 top-4 flex items-center gap-1 text-base">
               <Tag className="h-4 w-4" />
               SALE
             </Badge>
           )}
         </div>
+
+        {/* ✅ Product Details */}
         <div className="flex flex-col justify-center space-y-6">
           <h1 className="text-3xl font-bold tracking-tight md:text-4xl">{product.name}</h1>
           <p className="text-muted-foreground">{product.description}</p>

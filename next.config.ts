@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'i.ebayimg.com',
+      },
+      {
         hostname: 'placehold.co',
         port: '',
         pathname: '/**',
